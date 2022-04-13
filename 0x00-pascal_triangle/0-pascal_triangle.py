@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 
 """
@@ -11,7 +10,8 @@ from scipy.linalg import pascal
 
 def pascal_triangle(n: int):
     """
-       Returns a list of lists of integers representing the Pascal’s triangle of n.
+       Returns a list of lists of integers representing the
+       Pascal’s triangle of n.
 
         Args:
             n (int): Size of the Pascal Triangle.
