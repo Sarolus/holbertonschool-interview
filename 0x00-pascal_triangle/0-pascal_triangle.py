@@ -4,27 +4,36 @@
     Pascal Triangle Module
 """
 
-import numpy as np
-from scipy.linalg import pascal
 
-
-def pascal_triangle(n: int):
+def pascal_triangle(prmSize):
     """
-       Returns a list of lists of integers representing the
-       Pascal’s triangle of n.
-
-        Args:
-            n (int): Size of the Pascal Triangle.
-
-        Returns:
-            list: List of lists of integers representing the Pascal's triangle.
+        Return a list of lists of integers representing
+        the Pascal's triangle of prmSize.
     """
-    result = []
-    if n > 0:
-        triangle = pascal(n, kind='lower')
-        result = []
+    new_list = []
 
-        for row in triangle:
-            result.append(np.delete(row, np.where(row == 0)).tolist())
+    if prmSize <= 0:
+        return new_list
 
-    return result
+    for row in range(0, prmSize):
+        tmp = []
+        for column in range(0, row + 1):
+            tmp.append(get_binomial(row, column))
+        new_list.append(tmp)
+
+    return new_list
+
+
+def get_binomial(prmN, prmK):
+    """
+        Return the binomial coefficient, given a prmN (n)
+        integer and a prmK (k) integer.
+    """
+    coeff = 1
+    if (prmN - prmK < prmK):
+        prmK = prmN - prmK
+    for nb in range(0, prmK):
+        coeff *= (prmN - nb)
+        coeff = coeff // (nb + 1)
+
+    return coeff
