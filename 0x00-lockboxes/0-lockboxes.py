@@ -15,22 +15,17 @@ def canUnlockAll(boxes: list):
             boolean: Return True if all boxes can be opened,
                     else return False.
     """
-    unlocked_boxes = [0]
-    opened_boxes = []
+    opened_boxes = [0]
 
-    # While there is unlocked boxes
-    while unlocked_boxes:
-        temp_keys = []
+    # Je récupère la prochaine boite dévérouillée
+    for box in opened_boxes:
+        # Pour chaque box, je parcours toutes les clés
+        for key in boxes[box]:
 
-        # Browse each box contained in the boxes.
-        for box in unlocked_boxes:
-            opened_boxes.append(box)
-            # Browse each keys in a box.
-            for key in boxes[box]:
-                # Retrieve the keys if we do not have it.
-                if key not in opened_boxes:
-                    temp_keys.append(key)
+            # Je n'ouvre pas la box déjà associé à la clé
+            if key not in opened_boxes and key < len(boxes):
 
-        unlocked_boxes = temp_keys
+                # J'ouvre la boxe
+                opened_boxes.append(key)
 
-    return len(opened_boxes) == len(boxes)
+    return len(boxes) == len(opened_boxes)
