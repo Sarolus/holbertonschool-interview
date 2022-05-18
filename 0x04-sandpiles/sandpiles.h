@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 
-void print_grid(int prmGrid[3][3]);
 int checkGrid(int prmGrid[3][3]);
 void sumGrid(int srcGrid[3][3], int destGrid[3][3]);
 void transmitGrain(int prmGrid[3][3], int prmRow, int prmColumn);
