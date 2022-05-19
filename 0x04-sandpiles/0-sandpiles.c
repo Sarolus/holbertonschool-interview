@@ -101,23 +101,36 @@ void transmitGrain(int prmGrid[3][3], int prmRow, int prmColumn)
  */
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
-	int row, column;
+	int row, column, status1 = 0, status2 = 0;
+
+	for (row = 0; row < 3; row++)
+		for (column = 0; column < 3; column++)
+			if (grid1[row][column] > 0 && status1 == 0)
+				status1 = 1;
+
+	for (row = 0; row < 3; row++)
+		for (column = 0; column < 3; column++)
+			if (grid1[row][column] > 0 && status1 == 0)
+				status1 = 1;
 
 	do {
+
+		for (row = 0; row < 3; row++)
+			for (column = 0; column < 3; column++)
+				if (grid2[row][column] > 0 && status2 == 0)
+					status2 = 1;
+
 		sumGrid(grid2, grid1);
+		if (status1 == 0 || status2 == 0)
+			return;
+
 		printf("=\n");
 		print_grid(grid1);
 
 		for (row = 0; row < 3; row++)
-		{
 			for (column = 0; column < 3; column++)
-			{
 				if (grid1[row][column] > 3)
-				{
 					transmitGrain(grid2, row, column);
-				}
-			}
-		}
 
 		sumGrid(grid2, grid1);
 	} while (!checkGrid(grid1));
