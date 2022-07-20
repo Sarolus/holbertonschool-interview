@@ -48,7 +48,7 @@ class Chess:
         if not isinstance(prmValue, int):
             raise TypeError("N must be a number")
         if prmValue < 4:
-            raise ValueError("N must be least 4")
+            raise ValueError("N must be at least 4")
 
         self.__size = prmValue
 
