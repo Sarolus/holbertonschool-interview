@@ -2,6 +2,7 @@
 """
     Chess module.
 """
+import sys
 
 
 class Chess:
@@ -46,9 +47,11 @@ class Chess:
         if isinstance(prmValue, str) and prmValue.isnumeric():
             prmValue = int(prmValue)
         if not isinstance(prmValue, int):
-            raise TypeError("N must be a number")
+            print("N must be a number")
+            sys.exit(1)
         if prmValue < 4:
-            raise ValueError("N must be least 4")
+            print("N must be a least 4")
+            sys.exit(1)
 
         self.__size = prmValue
 
@@ -98,7 +101,6 @@ class Chess:
 
 
 if __name__ == "__main__":
-    import sys
 
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
