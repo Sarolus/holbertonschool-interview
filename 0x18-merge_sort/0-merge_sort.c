@@ -1,5 +1,4 @@
 #include "sort.h"
-#include "string.h"
 
 /**
  * merge - merge two part of an array
@@ -9,6 +8,7 @@
  * @prmEnd: end of the array
  * Return: nothing void
  */
+
 void merge(int *prmArray, int prmStart, int prmMiddle, int prmEnd)
 {
 	int cLoop1, cLoop2, cLoop3, cLoop4 = 0;
@@ -55,6 +55,7 @@ void merge(int *prmArray, int prmStart, int prmMiddle, int prmEnd)
  * @prmEnd: end of the array
  * Return: nothing void
  */
+
 void sort(int *prmArray, int prmStart, int prmEnd)
 {
 	int middle;
@@ -75,6 +76,7 @@ void sort(int *prmArray, int prmStart, int prmEnd)
  * @prmSize: size of the array
  * Return: nothing void
  */
+
 void merge_sort(int *prmArray, size_t prmSize)
 {
 	if (prmArray == NULL || prmSize < 2)
