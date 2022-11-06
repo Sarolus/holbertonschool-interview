@@ -21,8 +21,8 @@ typedef struct List
 	struct List *next;
 } List;
 
-List *add_node_end(List **list, char *str);
-List *add_node_begin(List **list, char *str);
-List *create_node(char *str);
+size_t list_len(const List *h);
+List *add_node_begin(List **head, char *str);
+List *add_node_end(List **head, char *str);
 
-#endif /* LIST_H*/
+#endif

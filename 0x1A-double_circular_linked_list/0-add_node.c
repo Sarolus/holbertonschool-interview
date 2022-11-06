@@ -1,100 +1,106 @@
-#include <stddef.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
 #include "list.h"
 
 /**
- * first_node - creates the first node of a list
+ * create_node - create a node
  *
- * @list: pointer to the list
- * @str: string to copy into the node
+ * @str: string to copy into the new node
  *
- * Return: pointer to the new node
+ * Return: new node or NULL
  */
-List *first_node(List **list, const char *str)
-{
-	List *new;
 
-	new = malloc(sizeof(List));
-	if (new == NULL)
+List *create_node(char *str)
+{
+	List *node = NULL;
+
+	node = malloc(sizeof(List));
+
+	if (!node)
 		return (NULL);
-	new->str = strdup(str);
-	new->next = new;
-	new->prev = new;
-	*list = new;
-	return (new);
+
+	node->str = strdup(str);
+
+	if (!node->str)
+	{
+		free(node);
+		return (NULL);
+	}
+
+	node->next = NULL;
+	node->prev = NULL;
+
+	return (node);
 }
 
 /**
- * add_node_end - adds node at the end
+ * add_node_end - Add a new node to the end of a double circular linked list
  *
- * @list: circular linked list
- * @str: string to insert
+ * @list: list to modify
+ * @str: string to copy into the new node
  *
  * Return: Address of the new node, or NULL on failure
  */
-List *add_node_begin(List **head, const char *str)
+
+List *add_node_end(List **list, char *str)
 {
-	List *new, *tmp, *aux;
+	List *node = NULL;
 
-	if (head == NULL)
-		return (NULL);
-	if (*head == NULL)
-		return (first_node(head, str));
+	node = create_node(str);
 
-	aux = *head;
-	new = malloc(sizeof(List));
-	if (new == NULL)
+	if (!node)
 		return (NULL);
-	new->str = strdup(str);
-	if (new->str == NULL)
+
+	if (!(*list))
 	{
-		free(new);
-		return (NULL);
+		node->next = node;
+		node->prev = node;
+		*list = node;
 	}
-	new->next = aux;
-	new->prev = aux->prev;
-	tmp = aux->prev;
-	aux->prev = new;
-	tmp->next = new;
 
-	return (new);
+	else
+	{
+		node->next = (*list);
+		node->prev = (*list)->prev;
+		(*list)->prev->next = node;
+		(*list)->prev = node;
+	}
+
+	return (node);
 }
 
 /**
- * add_node_begin - adds node at the beginning
+ * add_node_begin - Add a new node to the beginning
+ *                  of a double circular linked list
  *
- * @list: circular linked list
- * @str: string to insert
+ * @list: list to modify
+ * @str: string to copy into the new node
  *
  * Return: Address of the new node, or NULL on failure
  */
-List *add_node_end(List **head, const char *str)
+
+List *add_node_begin(List **list, char *str)
 {
-	List *new, *tmp, *aux;
+	List *node = NULL;
 
-	if (head == NULL)
-		return (NULL);
-	if (*head == NULL)
-		return (first_node(head, str));
+	node = create_node(str);
 
-	aux = *head;
-	new = malloc(sizeof(List));
-	if (new == NULL)
+	if (!node)
 		return (NULL);
-	new->str = strdup(str);
-	if (new->str == NULL)
+
+	if (!(*list))
 	{
-		free(new);
-		return (NULL);
+		node->next = node;
+		node->prev = node;
+		*list = node;
 	}
-	new->next = aux;
-	new->prev = aux->prev;
-	tmp = aux->prev;
-	aux->prev = new;
-	tmp->next = new;
-	*head = new;
 
-	return (new);
+	else
+	{
+		node->next = (*list);
+		node->prev = (*list)->prev;
+		(*list)->prev->next = node;
+		(*list)->prev = node;
+		*list = node;
+	}
+
+	return (node);
 }
